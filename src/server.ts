@@ -1,7 +1,6 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
-import { RESIZE_BEZIER } from 'jimp/*';
 
 (async () => {
 
@@ -30,7 +29,7 @@ import { RESIZE_BEZIER } from 'jimp/*';
 
   /**************************************************************************** */
 
-  app.get('/filteredimage', async (req, res) => {
+  app.get('/filteredimage', async (req: Request, res: Response) => {
     const { image_url } = req.query
     if (!image_url) res.status(400).send({ message: 'No image_url found in query'})
     const filteredpath = await filterImageFromURL(image_url)
